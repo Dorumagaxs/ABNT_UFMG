@@ -32,5 +32,5 @@ export: build
 	cp bin/main.pdf document.pdf
 
 clean:
-	rm -r bin/
-	rm document.pdf
+	if [ -d bin/ ]; then rm -r bin/; fi
+	if [ -f document.pdf ]; then rm document.pdf; fi

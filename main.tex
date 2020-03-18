@@ -42,6 +42,22 @@
 	{\centering\MakeUppercase{\textbf{#1}}\par}
 	\vspace{1.5cm}
 }
+% Define o comando para aspas
+\newcommand{\aspas}[1]{``#1"}
+% Define os comandos para os indicadores ordinais
+\renewcommand{\a}{\textsuperscript{\underline{a}}}
+\renewcommand{\o}{\textsuperscript{\underline{o}}}
+% Define o comando para numerais romanos
+\newcommand{\romannumber}[1]{\uppercase\expandafter{\romannumeral#1\relax}}
+% Define o comando para formatação de citações longas
+\newcommand{\citacaolonga}[1]{
+	\vspace{1.5cm}
+	\begin{adjustwidth}{4cm}{}
+		{\footnotesize#1}
+	\end{adjustwidth}
+	\vspace{1.5cm}
+}
+
 
 % Importa as variáveis
 \input{./variaveis.tex}
@@ -117,21 +133,6 @@
 \titleformat{\paragraph}{}{\theparagraph}{\spacecharacterlength}{}
 \titlespacing{\paragraph}{0em}{1.5cm}{1.5cm}
 
-% Define o comando para aspas
-\newcommand{\aspas}[1]{``#1"}
-% Define os comandos para os indicadores ordinais
-\renewcommand{\a}{\textsuperscript{\underline{a}}}
-\renewcommand{\o}{\textsuperscript{\underline{o}}}
-
-% Define o comando para formatação de citações longas
-\newcommand{\citacaolonga}[1]{
-	\vspace{1.5cm}
-	\begin{adjustwidth}{4cm}{}
-		{\footnotesize#1}
-	\end{adjustwidth}
-	\vspace{1.5cm}
-}
-
 \begin{document}
 	% Define a não exibição da numeração nas páginas pré-textuais
 	\pagestyle{empty}
@@ -183,10 +184,12 @@
 	\defbibheading{maiusculo}{
 		\section*{REFERÊNCIAS}
 	}
+	\setlength{\bibitemsep}{\baselineskip}
 	\printbibliography[heading=maiusculo]
 	\addcontentsline{toc}{section}{REFERÊNCIAS}
 
-%	\glossario				% opcional
-%	\apendice				% opcional
+%	\glossário				% opcional
+%	\índice					% opcional
+%	\apêndice				% opcional
 %	\anexos					% opcional
 \end{document}
