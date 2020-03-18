@@ -16,3 +16,56 @@
 %
 %	Contact: gabrielsdmello@gmail.com
 
+\newcommand{\banca}[2]{
+	\noindent\rule{.6\textwidth}{.5pt}\\
+	Dr. {\orientador} - UFMG (#2)\\
+	Julgamento:\rule{.3\textwidth}{.5pt}
+}
+
+\clearpage
+
+Nome: \autor
+
+\vfill
+
+Título: \titulo%
+\if\subtitulo\empty\else:\ \fi%
+\subtitulo
+
+\vfill
+
+\begin{adjustwidth}{8cm}{}
+%	\noindent\textbf{Versão final}
+%
+%	\vfill
+
+	\noindent\natureza
+
+	\vspace{1em}
+
+	\noindent Professor: \professor
+\end{adjustwidth}
+
+\vfill
+
+\begin{center}
+	Banca examinadora:
+\end{center}
+
+\vfill
+
+\banca{\orientador}{Orientador}
+
+\vfill
+
+\banca{\membroum}{Banca examinadora}
+
+\vfill
+
+\banca{\membrodois}{Banca examinadora}
+
+\vfill
+
+\begin{center}
+	\cidade, {\dia} de {\mes} de {\ano}
+\end{center}
