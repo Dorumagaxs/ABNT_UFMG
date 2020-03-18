@@ -1,0 +1,192 @@
+%	Um template LaTeX para geração de trabalhos acadêmicos no padrão ABNT exigido pela UFMG
+%	Copyright (C) 2019  Gabriel Santos de Mello
+%	
+%	This program is free software: you can redistribute it and/or modify
+%	it under the terms of the GNU General Public License as published by
+%	the Free Software Foundation, either version 3 of the License, or
+%	(at your option) any later version.
+%	
+%	This program is distributed in the hope that it will be useful,
+%	but WITHOUT ANY WARRANTY; without even the implied warranty of
+%	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%	GNU General Public License for more details.
+%	
+%	You should have received a copy of the GNU General Public License
+%	along with this program.  If not, see <https://www.gnu.org/licenses/>.
+%
+%	Contact: gabrielsdmello@gmail.com
+
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel}
+\usepackage{fontspec}
+\usepackage[a4paper,top=3cm,left=3cm,right=2cm,bottom=2cm]{geometry}
+\usepackage{setspace}
+\usepackage{changepage}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[backend=biber,style=abnt]{biblatex}
+\usepackage{hyperref}
+
+\addbibresource{bibliografia.bib}
+
+\usepackage{lipsum}
+
+% Define funções a serem usadas pelos elementos pré-textuais
+\newcommand{\titulopretexto}[1]{
+	{\centering\MakeUppercase{\textbf{#1}}\par}
+	\vspace{1.5cm}
+}
+
+% Importa as variáveis
+\input{./variaveis.tex}
+
+% Importa os arquivos contendo os elementos pré-textuais
+\newcommand{\capa}{\input{./pretextual/capa.tex}}
+\newcommand{\folhaderosto}{\input{./pretextual/folhaderosto.tex}}
+\newcommand{\fichacatalografica}{\input{./pretextual/fichacatalografica.tex}}
+\newcommand{\errata}{\input{./pretextual/errata.tex}}
+\newcommand{\folhadeaprovacao}{\input{./pretextual/folhadeaprovacao.tex}}
+\newcommand{\dedicatoria}{\input{./pretextual/dedicatoria.tex}}
+\newcommand{\agradecimento}{\input{./pretextual/agradecimento.tex}}
+\newcommand{\epigrafe}{\input{./pretextual/epigrafe.tex}}
+\newcommand{\resumo}{\input{./pretextual/resumo.tex}}
+\renewcommand{\abstract}{\input{./pretextual/abstract.tex}}
+\newcommand{\listadeabreviaturas}{\input{./pretextual/listadeabreviaturas.tex}}
+
+% Importa os arquivos contendo os elementos textuais
+\newcommand{\introducao}{\input{./textual/introducao.tex}}
+\newcommand{\desenvolvimento}{\input{./textual/desenvolvimento.tex}}
+\newcommand{\conclusao}{\input{./textual/conclusao.tex}}
+
+% Define Times New Roman como fonte do documento
+\setmainfont{Times New Roman}
+% Define o espaço entre parágrafos como 0
+\setlength{\parskip}{0em}
+% Define o recuo inicial dos parágrafos como 1,25cm
+\setlength{\parindent}{1.25cm}
+
+% Define o cabeçalho das páginas com numeração à direita
+\fancyhead[L,C]{}
+\fancyhead[R]{\footnotesize\thepage}
+\renewcommand{\headrulewidth}{0em}
+% Define o rodapé das páginas como vazio
+\fancyfoot[L,C,R]{}
+
+% Define a formatação da seção para elementos pré-textuais
+\newcommand{\pretextualsection}{%
+	\titleformat{\section}{\centering\normalfont\bfseries\MakeUppercase}{}{\spacecharacterlength}{}
+}
+
+% Define a formatação da lista de figuras
+\titlecontents{figure}[0em]{Figura\hspace{1.4em}--- }{\contentslabel{2.3em}}{}{\bfseries\dotfill\contentspage}
+
+% Define a formatação da lista de tabelas
+\titlecontents{table}[0em]{Tabela\hspace{1.4em}--- }{\contentslabel{2.3em}}{}{\bfseries\dotfill\contentspage}
+
+% Define a formatação do sumário
+\contentsmargin{1em}
+\titlecontents{section}[1em]{}{\bfseries\contentslabel{1em}}{\bfseries}{\bfseries\dotfill\contentspage}[\addvspace{1em}]
+\titlecontents{subsection}[3em]{}{\bfseries\contentslabel{2em}}{}{\bfseries\dotfill\contentspage}[\addvspace{.5em}]
+\dottedcontents{subsubsection}[5em]{}{3em}{.4em}
+\dottedcontents{paragraph}[7em]{}{4em}{.4em}
+
+% Define as formatações das seções
+\newlength{\spacecharacterlength}
+\settowidth{\spacecharacterlength}{ }
+\newcommand{\sectionbreak}{\clearpage}
+\newcommand{\textualsection}{%
+	\titleformat{\section}{\bfseries}{\thesection}{\spacecharacterlength}{}
+}
+\titlespacing{\section}{0em}{0em}{1.5cm}
+% Define as formatações das subseções
+\titleformat{\subsection}{\bfseries}{\thesubsection}{\spacecharacterlength}{}
+\titlespacing{\subsection}{0em}{1.5cm}{1.5cm}
+% Define as formatações das subsubseções
+\titleformat{\subsubsection}{}{\thesubsubsection}{\spacecharacterlength}{}
+\titlespacing{\subsubsection}{0em}{1.5cm}{1.5cm}
+% Define as formatações das subsubsubseções
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+\renewcommand{\theparagraph}{\thesubsubsection.\arabic{paragraph}}
+\titleformat{\paragraph}{}{\theparagraph}{\spacecharacterlength}{}
+\titlespacing{\paragraph}{0em}{1.5cm}{1.5cm}
+
+% Define o comando para aspas
+\newcommand{\aspas}[1]{``#1"}
+% Define os comandos para os indicadores ordinais
+\renewcommand{\a}{\textsuperscript{\underline{a}}}
+\renewcommand{\o}{\textsuperscript{\underline{o}}}
+
+% Define o comando para formatação de citações longas
+\newcommand{\citacaolonga}[1]{
+	\vspace{1.5cm}
+	\begin{adjustwidth}{4cm}{}
+		{\footnotesize#1}
+	\end{adjustwidth}
+	\vspace{1.5cm}
+}
+
+\begin{document}
+	% Define a não exibição da numeração nas páginas pré-textuais
+	\pagestyle{empty}
+
+	% Define o espaçamento de 1,5 entre as linhas
+	\onehalfspacing
+
+	% Evoca os elementos pré-textuais
+	\capa 					% obrigatório
+
+	% Inicia a contagem de páginas ainda sem exibir a numeração
+	\clearpage
+	\pagenumbering{arabic}
+
+	% Continua a evocação dos elementos pré-textuais
+	\folhaderosto 			% obrigatório
+%	\fichacatalografica 	% obrigatório para trabalhos em nível pós-graduação
+%	\errata 				% opcional
+%	\folhadeaprovacao 		% obrigatório
+	\dedicatoria 			% opcional
+	\agradecimento 			% opcional
+	\epigrafe 				% opcional
+	\resumo					% obrigatório
+	\abstract				% obrigatório
+
+	% Define a formatação da seção para o modelo de elementos pré-textuais
+	\pretextualsection
+
+	\listoffigures			% opcional
+	\listoftables			% opcional
+	\listadeabreviaturas	% opcional
+	\tableofcontents		% obrigatório
+
+	% Define a formatação da seção para o modelo de elementos textuais
+	\textualsection
+
+	% Define o início da exibição da numeração
+	\clearpage
+	\pagestyle{fancy}
+
+	% Evoca os elementos textuais
+	\introducao
+	\desenvolvimento
+	\conclusao
+
+	% Evoca os elementos pós-textuais
+	\clearpage
+	\phantomsection
+	\defbibheading{maiusculo}{
+		\section*{REFERÊNCIAS}
+	}
+	\printbibliography[heading=maiusculo]
+	\addcontentsline{toc}{section}{REFERÊNCIAS}
+
+%	\glossario				% opcional
+%	\apendice				% opcional
+%	\anexos					% opcional
+\end{document}
