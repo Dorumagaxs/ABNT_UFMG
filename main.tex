@@ -58,7 +58,6 @@
 	\vspace{1.5cm}
 }
 
-
 % Importa as variáveis
 \input{./variaveis.tex}
 
@@ -80,6 +79,12 @@
 \newcommand{\desenvolvimento}{\input{./textual/desenvolvimento.tex}}
 \newcommand{\conclusao}{\input{./textual/conclusao.tex}}
 
+% Importa os arquivos contendo os elementos pós-textuais
+\newcommand{\glossario}{\input{./postextual/glossario.tex}}
+\newcommand{\apendices}{\input{./postextual/apendices.tex}}
+\newcommand{\anexos}{\input{./postextual/anexos.tex}}
+\newcommand{\indice}{\input{./postextual/indice.tex}}
+
 % Define Times New Roman como fonte do documento
 \setmainfont{Times New Roman}
 % Define o espaço entre parágrafos como 0
@@ -94,11 +99,6 @@
 % Define o rodapé das páginas como vazio
 \fancyfoot[L,C,R]{}
 
-% Define a formatação da seção para elementos pré-textuais
-\newcommand{\pretextualsection}{%
-	\titleformat{\section}{\centering\normalfont\bfseries\MakeUppercase}{}{\spacecharacterlength}{}
-}
-
 % Define a formatação da lista de figuras
 \titlecontents{figure}[0em]{Figura\hspace{1.4em}--- }{\contentslabel{2.3em}}{}{\bfseries\dotfill\contentspage}
 
@@ -112,12 +112,25 @@
 \dottedcontents{subsubsection}[5em]{}{3em}{.4em}
 \dottedcontents{paragraph}[7em]{}{4em}{.4em}
 
-% Define as formatações das seções
+
+% Define a formatação da seção para elementos pré-textuais
+\newcommand{\pretextualsection}{%
+	\titleformat{\section}{\centering\normalfont\bfseries\MakeUppercase}{}{\spacecharacterlength}{}
+}
+% Define a formatação das seções
 \newlength{\spacecharacterlength}
 \settowidth{\spacecharacterlength}{ }
 \newcommand{\sectionbreak}{\clearpage}
 \newcommand{\textualsection}{%
 	\titleformat{\section}{\bfseries}{\thesection}{\spacecharacterlength}{}
+}
+% Define a formatação das seções para elementos pós-textuais
+\newcommand{\postextualsection}[1]{%
+	\setcounter{section}{0}
+	\renewcommand{\thesection}{\Alph{section}}
+	\renewcommand{\sectionbreak}{\clearpage}
+	\titleformat{\section}{\centering\normalfont\bfseries}{{#1} {\thesection} - }{\spacecharacterlength}{}
+	\titlecontents{section}[1em]{}{\bfseries{#1} \contentslabel{0em}\hspace{.5em} - }{}{\bfseries\dotfill\contentspage}[\addvspace{1em}]
 }
 \titlespacing{\section}{0em}{0em}{1.5cm}
 % Define as formatações das subseções
@@ -188,8 +201,10 @@
 	\printbibliography[heading=maiusculo]
 	\addcontentsline{toc}{section}{REFERÊNCIAS}
 
-%	\glossário				% opcional
-%	\índice					% opcional
-%	\apêndice				% opcional
-%	\anexos					% opcional
+%	\glossario				% opcional
+	\postextualsection{APÊNDICE}
+	\apendices
+	\postextualsection{ANEXO}
+	\anexos					% opcional
+%	\indice					% opcional
 \end{document}
