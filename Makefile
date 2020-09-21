@@ -18,14 +18,15 @@
 
 all: build view
 
-build:
+bin/main.pdf: main.tex bibliografia.bib variaveis.tex pretextual/* postextual/* textual/* textual/capitulos/*
+build: bin/main.pdf
 	if [ ! -d bin/ ]; then mkdir bin/; fi
 	xelatex --output-directory=bin/ main.tex
 	xelatex --output-directory=bin/ main.tex
 	biber -input-directory=bin/ -output-directory=bin/ main
 	xelatex --output-directory=bin/ main.tex
 
-view:
+view: build
 	zathura bin/main.pdf &
 
 export: build
