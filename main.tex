@@ -75,9 +75,7 @@
 \newcommand{\listadeabreviaturas}{\input{./pretextual/listadeabreviaturas.tex}}
 
 % Importa os arquivos contendo os elementos textuais
-\newcommand{\introducao}{\input{./textual/introducao.tex}}
-\newcommand{\desenvolvimento}{\input{./textual/desenvolvimento.tex}}
-\newcommand{\conclusao}{\input{./textual/conclusao.tex}}
+\newcommand{\texto}{\input{./textual/texto.tex}}
 
 % Importa os arquivos contendo os elementos pós-textuais
 \newcommand{\glossario}{\input{./postextual/glossario.tex}}
@@ -85,8 +83,16 @@
 \newcommand{\anexos}{\input{./postextual/anexos.tex}}
 \newcommand{\indice}{\input{./postextual/indice.tex}}
 
+% Importa as referências manualmente escritas
+\newcommand{\referenciasmanuais}{
+	\section*{REFERÊNCIAS}
+	\input{./referencias.tex}
+	\clearpage
+}
+
 % Define Times New Roman como fonte do documento
 \setmainfont{Times New Roman}
+%\setmainfont{Arial}
 % Define o espaço entre parágrafos como 0
 \setlength{\parskip}{0em}
 % Define o recuo inicial dos parágrafos como 1,25cm
@@ -187,19 +193,18 @@
 	\pagestyle{fancy}
 
 	% Evoca os elementos textuais
-	\introducao
-	\desenvolvimento
-	\conclusao
+	\texto
 
 	% Evoca os elementos pós-textuais
 	\clearpage
-	\phantomsection
-	\defbibheading{maiusculo}{
-		\section*{REFERÊNCIAS}
-	}
-	\setlength{\bibitemsep}{\baselineskip}
-	\printbibliography[heading=maiusculo]
-	\addcontentsline{toc}{section}{REFERÊNCIAS}
+	\referenciasmanuais
+%	\phantomsection
+%	\defbibheading{maiusculo}{
+%		\section*{REFERÊNCIAS}
+%	}
+%	\setlength{\bibitemsep}{\baselineskip}
+%	\printbibliography[heading=maiusculo]
+%	\addcontentsline{toc}{section}{REFERÊNCIAS}
 
 %	\glossario				% opcional
 	\postextualsection{APÊNDICE}
